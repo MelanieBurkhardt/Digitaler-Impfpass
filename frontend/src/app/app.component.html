@@ -1,8 +1,25 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Digitaler Impfpass
   </h1>
+  <h2>
+    Anmeldung
+  </h2>
+
+  <form>
+    <div class="floating-placeholder">
+      <label for="username">Username</label>
+      <input [(ngModel)]="user.username" type="text" id="username" name="username"/>
+    </div>
+    <div class="floating-placeholder">
+      <label for="password">Password</label>
+      <input [(ngModel)]="user.password" type="password" id="password" name="password"/>
+    </div>
+    <div class="floating-placeholder">
+      <input style="background-color: skyblue" type="button" (click)="sendForm()" value="Log In"/>
+    </div>
+  </form>
 
   <div *ngIf="!logoutSuccess">
 

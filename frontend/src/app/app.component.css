@@ -1,0 +1,96 @@
+body {
+  background: #34495e;
+  color: white;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+a {
+  color: inherit;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+input, .floating-placeholder {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 20pt;
+  line-height: 2.6em;
+  height: 2.6em;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.floating-placeholder input:focus + label {
+  color: #16abf0;
+}
+
+.floating-placeholder input[value] + label {
+  color: red;
+}
+
+.floating-placeholder {
+  position: relative;
+}
+
+.floating-placeholder input {
+  font-size: 20pt;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background: transparent;
+  z-index: 2;
+  border-bottom: 1px solid #ccc;
+  text-indent: 20px;
+}
+
+.floating-placeholder:last-child input {
+  border-bottom: none;
+}
+
+.floating-placeholder label {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-size: 20pt;
+  z-index: 1;
+  -moz-transform-origin: 0 0em;
+  -ms-transform-origin: 0 0em;
+  -webkit-transform-origin: 0 0em;
+  transform-origin: 0 0em;
+  -moz-transition: -moz-transform 160ms, color 200ms;
+  -o-transition: -o-transform 160ms, color 200ms;
+  -webkit-transition: -webkit-transform 160ms, color 200ms;
+  transition: transform 160ms, color 200ms;
+  -moz-transform: scale(1, 1) rotateY(0);
+  -ms-transform: scale(1, 1) rotateY(0);
+  -webkit-transform: scale(1, 1) rotateY(0);
+  transform: scale(1, 1) rotateY(0);
+  color: #999;
+}
+
+.floating-placeholder-float label {
+  -moz-transform: scale(0.55, 0.55) rotateY(0);
+  -ms-transform: scale(0.55, 0.55) rotateY(0);
+  -webkit-transform: scale(0.55, 0.55) rotateY(0);
+  transform: scale(0.55, 0.55) rotateY(0);
+}
+
+.floating-placeholder-float input {
+  line-height: 3.4em;
+}

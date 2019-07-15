@@ -8,6 +8,9 @@ var session = require('express-session');
 var passport = require('passport');
 var saml = require('passport-saml');
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 dotenv.load();
 
 passport.serializeUser(function(user, done) {
@@ -38,7 +41,29 @@ var samlStrategy = new saml.Strategy({
   return done(null, profile); 
 });
 
-passport.use(samlStrategy);
+var user = {
+    username: "jannickW",
+    password: "abcde",
+    usefulInformation: "secret"
+};
+
+// passport.use(samlStrategy);
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+},
+    function(username, password, done) {
+        console.log(username, password);
+            if (username !== "jannickW") {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+        if (password !== "abcde") {
+            return done(null, false, { message: 'Incorrect password.' });
+        }
+        console.log('authentificated');
+        return done(null, user);
+    }
+));
 
 var app = express();
 
@@ -52,25 +77,35 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated())
     return next();
   else
-    return res.redirect('/login');
+    return res.header('Access-Control-Allow-Origin', '*').redirect('/login');
 }
 
 app.get('/',
   ensureAuthenticated, 
   function(req, res) {
-    res.send('Authenticated');
+    res.header('Access-Control-Allow-Origin', '*').send('Authenticated');
   }
 );
 
-app.get('/login',
-  passport.authenticate('saml', { failureRedirect: '/login/fail' }),
-  function (req, res) {
-    res.redirect('/');
-  }
+app.post('/login',
+    passport.authenticate('local'),
+    function(req, res) {
+        console.log('successfully authentificated');
+        res.status(200)
+            .type('application/json')
+            .header('Access-Control-Allow-Origin', '*')
+            .send('{"token": "abasbdasdaksjdlaks"}');
+    }
 );
 
+/*app.get('/login',
+    function (req, res) {
+        console.log('redirect was successful');
+        res.status(200).header('Access-Control-Allow-Origin', '*').send('successful login');
+    });
+*/
 app.post('/login/callback',
-   passport.authenticate('saml', { failureRedirect: '/login/fail' }),
+   passport.authenticate('local', { failureRedirect: '/login/fail' }),
   function(req, res) {
     res.redirect('/');
   }
