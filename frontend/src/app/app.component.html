@@ -7,7 +7,7 @@
     Anmeldung
   </h2>
 
-  <form>
+  <form (ngSubmit)="sendForm()>
     <div class="floating-placeholder">
       <label for="username">Username</label>
       <input [(ngModel)]="user.username" type="text" id="username" name="username"/>
@@ -17,7 +17,7 @@
       <input [(ngModel)]="user.password" type="password" id="password" name="password"/>
     </div>
     <div class="floating-placeholder">
-      <input style="background-color: skyblue" type="button" (click)="sendForm()" value="Log In"/>
+      <input style="background-color: skyblue" type="submit" value="Log In"/>
     </div>
   </form>
 
