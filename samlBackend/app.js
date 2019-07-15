@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var saml = require('passport-saml');
+var cors = require('cors');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -66,6 +67,8 @@ passport.use(new LocalStrategy({
 ));
 
 var app = express();
+// Allways use CORS
+app.use(cors());
 
 app.use(cookieParser());
 app.use(bodyParser());
@@ -77,33 +80,26 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated())
     return next();
   else
-    return res.header('Access-Control-Allow-Origin', '*').redirect('/login');
+    return res.redirect('/login');
 }
 
 app.get('/',
   ensureAuthenticated, 
   function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*').send('Authenticated');
+    res.send('Authenticated');
   }
 );
 
 app.post('/login',
-    passport.authenticate('local'),
+    passport.authenticate('local', { failureRedirect: '/login/fail' }),
     function(req, res) {
         console.log('successfully authentificated');
         res.status(200)
             .type('application/json')
-            .header('Access-Control-Allow-Origin', '*')
             .send('{"token": "abasbdasdaksjdlaks"}');
     }
 );
 
-/*app.get('/login',
-    function (req, res) {
-        console.log('redirect was successful');
-        res.status(200).header('Access-Control-Allow-Origin', '*').send('successful login');
-    });
-*/
 app.post('/login/callback',
    passport.authenticate('local', { failureRedirect: '/login/fail' }),
   function(req, res) {
