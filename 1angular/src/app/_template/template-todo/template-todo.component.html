@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <span class="username">{{nutzername}}</span>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <mat-form-field>
+                <mat-label>Land</mat-label>
+                <mat-select name="sel_country" [(ngModel)]="sel_country" (ngModelChange)="onCountrySelection()">
+                    <mat-option *ngFor="let country of countries" [value]="country.value">
+                        {{country.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-left">
+            <table style="margin: auto;">
+                <tr *ngFor="let objImpfung of impfungen_for_sel_country; let i = index">
+                    <td>
+                        <label>
+                            <input type="checkbox" name="impfung" value="{{objImpfung}}">
+                            {{objImpfung}}
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
