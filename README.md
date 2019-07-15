@@ -9,8 +9,11 @@ Install node.js
 ## Packages and Execution
 
 Run `npm install` to install node packages
-Run `npm start` to execute script
-Run `node app.js` to call to server
+
+Run `npm start` to execute script (frondend)
+
+Run `node app.js` to call to server (samlBackend)
+
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
