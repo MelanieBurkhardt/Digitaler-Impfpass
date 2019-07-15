@@ -1,0 +1,34 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <div *ngIf="!logoutSuccess">
+
+    <div *ngIf="apiToken">
+      You are authenticated and your API token is {{ apiToken }}
+    </div>
+
+    <div style="margin-top: 15px" *ngIf="apiResult">
+      We just made a call to the backend api with the above token and the result is
+      {{ apiResult }}
+    </div>
+
+    <div *ngIf="showUnauthorizedMessage">
+      Your are not authenticated, please wait a few seconds for redirection to saml identity provider...
+    </div>
+
+    <button style="margin-top: 15px" *ngIf="apiToken"  (click)=logout()> logout</button>
+
+  </div>
+
+  <div *ngIf="logoutSuccess" style="margin-top: 15px">
+    Successfully logout, refresh the app to log in again
+  </div>
+
+
+
+</div>
+
+
