@@ -10,10 +10,6 @@ import {ApiToken} from "./ApiToken";
 })
 export class AppComponent implements OnInit {
 
-  loginForm;
-
-  title = 'app';
-
   apiToken: string;
 
   showUnauthorizedMessage: boolean;
@@ -54,19 +50,23 @@ export class AppComponent implements OnInit {
   handleTokenError(error: HttpErrorResponse) {
 
     if (error.status === 401) {
-      this.showUnauthorizedMessage = true;
-      setTimeout(() => window.location.replace('http://localhost:8080/saml/login'), 4000);
+      alert('The combination of username and password you entered was wrong. Please use a valid username and password!');
+      // Uncomment to activate redirect to saml page
+      //this.showUnauthorizedMessage = true;
+      // setTimeout(() => window.location.replace('http://localhost:8080/saml/login'), 4000);
     }
   }
 
   callApi() {
     const apiToken = localStorage.getItem("apiToken");
-    console.log(apiToken);
-    this.httpClient.get('/service/api/mycontroller/', {
+    // Uncomment to use access the api with the api token (see header format)
+/*    this.httpClient.get('/service/api/mycontroller/', {
       headers: {
         'x-auth-token': apiToken
       }
     }).subscribe(r => this.apiResult = JSON.stringify(r));
+*/
+    this.apiResult = 'this is the result of the mocked API Call';
   }
 
   logout() {
