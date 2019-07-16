@@ -8,6 +8,9 @@ var session = require('express-session');
 var passport = require('passport');
 var saml = require('passport-saml');
 var cors = require('cors');
+// MongoDB einbinden
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
