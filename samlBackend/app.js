@@ -14,6 +14,12 @@ var assert = require('assert');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+// Keycloack
+var session = require('express-session');
+var Keycloak = require('keycloak-connect');
+
+var memoryStore = new session.MemoryStore();
+var keycloak = new Keycloak({ store: memoryStore });
 
 dotenv.load();
 

@@ -9,6 +9,7 @@
     "dotenv": "0.5.1",
     "express": "4.11.2",
     "express-session": "1.10.2",
+    "keycloak-connect": "^6.0.1",
     "passport": "0.2.1",
     "passport-local": "^1.0.0",
     "passport-saml": "0.9.0"
