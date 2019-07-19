@@ -57,23 +57,7 @@ var user = {
     usefulInformation: "secret"
 };
 
-// passport.use(samlStrategy);
-passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-},
-    function(username, password, done) {
-        console.log(username, password);
-            if (username !== "jannickW") {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-        if (password !== "abcde") {
-            return done(null, false, { message: 'Incorrect password.' });
-        }
-        console.log('authentificated');
-        return done(null, user);
-    }
-));
+passport.use(samlStrategy);
 
 var app = express();
 // Allways use CORS
@@ -99,21 +83,19 @@ app.get('/',
   }
 );
 
-app.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login/fail' }),
+app.get('/login',
+    passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
         console.log('successfully authentificated');
-        res.status(200)
-            .type('application/json')
-            .send('{"token": "abasbdasdaksjdlaks"}');
+        res.redirect('/');
     }
 );
 
 app.post('/login/callback',
-   passport.authenticate('local', { failureRedirect: '/login/fail' }),
-  function(req, res) {
-    res.redirect('/');
-  }
+    passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
+    function(req, res) {
+        res.redirect('/');
+    }
 );
 
 app.get('/login/fail', 
