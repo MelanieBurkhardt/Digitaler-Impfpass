@@ -1,6 +1,6 @@
 #FileLock
-#Thu Jul 18 16:13:57 CEST 2019
-server=10.172.90.55\:52561
-hostName=LAPTOP-13GJS3D9
+#Fri Jul 19 14:34:54 CEST 2019
+hostName=172.24.98.30
+id=16c0a3a50e1b747192765dd7b68b2c130e7df0ddcdc
 method=file
-id=16c056eb5bb470eb4cd4cbd8293e0cd1f813cbf21a9
+server=172.24.98.30\:52783
