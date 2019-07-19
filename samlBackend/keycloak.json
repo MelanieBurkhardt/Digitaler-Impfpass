@@ -1,6 +1,6 @@
 {
-    "clientId": "ImpfpassClient",
-    "name": "ImpfpassClient",
+    "clientId": "keycloak",
+    "name": "keycloak",
     "rootUrl": "http://localhost:4200",
     "adminUrl": "http://localhost:4200",
     "baseUrl": "/login",
