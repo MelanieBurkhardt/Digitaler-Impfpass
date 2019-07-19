@@ -1,3 +1,7 @@
 frontend/node_modules
 samlBackend/node_modules
 .idea
+keycloak-6.0.1/standalone/data/keycloak.lock.db
+keycloak-6.0.1/standalone/log/server.log
+keycloak-6.0.1/standalone/tmp/startup-marker
+keycloak-6.0.1/standalone/data/keycloak.trace.db
