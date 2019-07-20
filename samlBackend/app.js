@@ -14,7 +14,7 @@ var assert = require('assert');
 var MemoryStore = require('memorystore')(session);
 
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var samlStrategy = require('passport-saml').Strategy;
 // Keycloack
 var session = require('express-session');
 var Keycloak = require('keycloak-connect');
@@ -55,7 +55,7 @@ var samlStrategy = new saml.Strategy({
 passport.use(samlStrategy);
 
 var app = express();
-// Allways use CORS
+// Always use CORS
 app.use(cors());
 
 app.use(cookieParser());
@@ -65,8 +65,21 @@ app.use(session({
 	name: "impfpass_session",
 	proxy: true,
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: true,
+	store: memoryStore,
+	cookie: {
+		secure: false,
+	}
 }));
+
+app.use(keycloak.middleware());
+
+// session cookies
+if (app.get('env') === 'production') {
+	app.set('trust proxy', 1) // trust first proxy
+	session.cookie.secure = true // save secure cookies
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -74,15 +87,20 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	else
-		return res.redirect('/login');
-}
+		// return res.redirect('/login')
+		return res.status(200)
+		.send('{"token": "abasbdasdaksjdlaks"}')
+};
 
+// routes
 app.get('/',
 	ensureAuthenticated,
+	keycloak.protect(),
 	function (req, res) {
 		res.status(200)
 			.type('application/json')
-			.send('{"token": "abasbdasdaksjdlaks"}').redirect('localhost:4200');
+			.send('{"token": "abasbdasdaksjdlaks"}')
+			.redirect('localhost:4200');
 	}
 );
 
