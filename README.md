@@ -17,11 +17,11 @@ Run `node app.js` to call to server (samlBackend)
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
-## Configuration
+## Configuration 
 
-Import `realm-export_keycloak.json` into keycloak
+Import `realm-export_keycloak.json` from the project into keycloak (main menu > import > overwrite files)
 
-If something in Keycloak is changed, export the whole config and replace the json-File
+If something in Keycloak is changed e. g. clients, export the whole config and replace the json-File `realm-export_keycloak.json`
 
 
 ## TODOs: 

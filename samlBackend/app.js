@@ -72,13 +72,13 @@ app.use(session({
 	}
 }));
 
-app.use(keycloak.middleware());
+app.use(Keycloak.middleware());
 
 // session cookies
-if (app.get('env') === 'production') {
-	app.set('trust proxy', 1) // trust first proxy
-	session.cookie.secure = true // save secure cookies
-}
+// if (app.get('env') === 'production') {
+// 	app.set('trust proxy', 1) // trust first proxy
+// 	session.cookie.secure = true // save secure cookies
+// }
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -87,15 +87,15 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	else
-		// return res.redirect('/login')
-		return res.status(200)
-		.send('{"token": "abasbdasdaksjdlaks"}')
+		return res.redirect('/login')
+		// return res.status(200)
+		// .send('{"token": "abasbdasdaksjdlaks"}')
 };
 
 // routes
 app.get('/',
 	ensureAuthenticated,
-	keycloak.protect(),
+	Keycloak.protect(),
 	function (req, res) {
 		res.status(200)
 			.type('application/json')
