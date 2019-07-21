@@ -10,6 +10,7 @@
     "redirectUris": [
         "http://127.0.0.1:4200",
         "http://127.0.0.1:4006",
+        "*",
         "http://localhost:4006/login/callback"
     ],
     "webOrigins": [],
