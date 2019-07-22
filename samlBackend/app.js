@@ -1,6 +1,6 @@
 var http = require('http');
 var fs = require('fs');
-var express = require("express");
+var express = require('express');
 var dotenv = require('dotenv');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -12,6 +12,11 @@ var cors = require('cors');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var MemoryStore = require('memorystore')(session);
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+
+const app = express();
 
 var passport = require('passport');
 var samlStrategy = require('passport-saml').Strategy;
@@ -54,12 +59,24 @@ var samlStrategy = new saml.Strategy({
 
 passport.use(samlStrategy);
 
-var app = express();
 // Always use CORS
 app.use(cors());
 
+// Middleware not supported by Express, source: https://www.npmjs.com/package/body-parser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
+// create application/json parser
+var jsonParser = bodyParser.json()
+ 
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 app.use(cookieParser());
-app.use(bodyParser());
+// app.use(bodyParser());
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	name: "impfpass_session",
@@ -158,3 +175,5 @@ app.use(function (err, req, res, next) {
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
+
+// TODO: Insert MongoDB content from mongoDBconnection/app.js here
