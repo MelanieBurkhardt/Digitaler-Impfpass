@@ -8,7 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 var saml = require('passport-saml');
 var cors = require('cors');
-// MongoDB einbinden
+// TODO: proper MongoDB connection  
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var MemoryStore = require('memorystore')(session);
@@ -88,8 +88,6 @@ function ensureAuthenticated(req, res, next) {
 		return next();
 	else
 		return res.redirect('/login')
-		// return res.status(200)
-		// .send('{"token": "abasbdasdaksjdlaks"}')
 };
 
 // routes
@@ -108,7 +106,7 @@ app.get('/login',
 	passport.authenticate('saml', {failureRedirect: '/', failureFlash: true}),
 	function (req, res) {
 		console.log('successfully authentificated');
-		res.redirect('localhost:4200');
+		res.redirect('http://localhost:4200');
 	}
 );
 
