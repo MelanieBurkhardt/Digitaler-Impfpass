@@ -8,6 +8,9 @@ var session = require('express-session');
 var passport = require('passport');
 var saml = require('passport-saml');
 var cors = require('cors');
+const webdav = require('webdav-server').v2;
+// Use var instead of const, because sever is declared twice
+var server = new webdav.WebDAVServer();
 // TODO: proper MongoDB connection  
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
@@ -136,7 +139,6 @@ app.post('/login/callback',
 
 app.get('/apitoken',
 	function (req, res) { 
-		// console.log('hi');
 		if (req.session !=={}) {
 			console.log(req.session);
 			res.status(200)
@@ -183,8 +185,14 @@ app.use(function (err, req, res, next) {
 	next(err);
 });
 
+// WebDAV 
+server.setFileSystem('/webDAV', new webdav.PhysicalFileSystem('\Desktop\test'), (success) => {
+    //server.start(() => console.log('READY'));
+});
+
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
+
 
 // TODO: Insert MongoDB content from mongoDBconnection/app.js here
