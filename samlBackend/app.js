@@ -135,16 +135,27 @@ app.post('/login/callback',
 );
 
 app.get('/apitoken',
-	function (req, res) {
-		// TODO: Fix req.isAuthenticated. It doesnt recognize a revisiting user - as a result the api key is never submitted
-		if (req.isAuthenticated()) {
+	function (req, res) { 
+		// console.log('hi');
+		if (req.session !=={}) {
+			console.log(req.session);
 			res.status(200)
-				.type('application/json')
-				.send('{"token": "abasbdasdaksjdlaks"}');
+			.type('application/json')
+			.send('{"token": "abasbdasdaksjdlaks"}');
 		} else {
-			res.status(401).send();
+			res.status(401).send;
 		}
 	}
+	// function (req, res) {
+	// 	// TODO: Fix req.isAuthenticated. It doesnt recognize a revisiting user - as a result the api key is never submitted
+	// 	if (req.isAuthenticated()) {
+	// 		res.status(200)
+	// 			.type('application/json')
+	// 			.send('{"token": "abasbdasdaksjdlaks"}');
+	// 	} else {
+	// 		res.status(401).send();
+	// 	}
+	// }
 );
 
 app.get('/logout', function (req, res) {
