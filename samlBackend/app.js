@@ -181,13 +181,15 @@ function ensureAuthenticated(req, res, next) {
 };
 
 // routes
-app.get('/',
-	ensureAuthenticated,
-	Keycloak.protect(),
+app.get('/test', (req, res, next) => {console.log('###############'); next()});
+
+app.get('/', 
+	ensureAuthenticated, (req, res, next) => {console.log('###############'); next();},
+	Keycloak.protect(), 
 	function (req, res) {
 		res.status(200)
 			.type('application/json')
-			.send('{"token": "abasbdasdaksjdlaks"}')
+			.send('{"token": "112222333"}')
 			.redirect('localhost:4200');
 	}
 );
@@ -208,12 +210,14 @@ app.post('/login/callback',
 );
 
 app.get('/apitoken',
+ensureAuthenticated, (req, res, next) => {console.log('###############'); next();},
+Keycloak.protect(),
 	function (req, res) { 
 		if (req.session !=={}) {
 			console.log(req.session);
 			res.status(200)
 			.type('application/json')
-			.send('{"token": "abasbdasdaksjdlaks"}');
+			.send('{"token": "aaaaaaaaaabbbbbbbbb"}');
 		} else {
 			res.status(401).send;
 		}
@@ -255,13 +259,15 @@ app.use(function (err, req, res, next) {
 	next(err);
 });
 
-// WebDAV 
-server.setFileSystem('/webDAV', new webdav.PhysicalFileSystem('\Desktop\test'), (success) => {
-    //server.start(() => console.log('READY'));
+// WebDAV Server
+server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('C:/Users/burkh/Documents/15_Master/01_Kernfächer/Service Solution Design/DigitalerImpfpass/samlBackend/public/webDavFiles'), (success) => {
+     console.log('READY');
 });
 
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
+
+app.use(webdav.extensions.express('/webDAV', server));
 
 
