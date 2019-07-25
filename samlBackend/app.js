@@ -1,4 +1,5 @@
 var http = require('http');
+var https = require('https');
 var fs = require('fs');
 var express = require('express');
 var dotenv = require('dotenv');
@@ -311,7 +312,16 @@ server.start(() => console.log('READY'));
 //         console.error(err.message);
 //     }
 // });
- 
+
+// https
+https.createServer({
+	key: fs.readFileSync('./cert/server.key'),
+	cert: fs.readFileSync('./cert/server.cert')
+}, app)
+	.listen(8443, function () {
+		console.log('Listening on https port 8443', server.address().port)
+	});
+
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
