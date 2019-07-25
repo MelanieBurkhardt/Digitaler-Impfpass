@@ -104,7 +104,7 @@ app.use('/', (req, res) => {console.log('hallo');
   res.set('Content-Disposition', 'attachment; filename="worktile.pro.calendar.my.ics"');
   res.send(iCalString);
 }); */
-
+//maybe app.use for appointments required
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
@@ -260,14 +260,36 @@ app.use(function (err, req, res, next) {
 });
 
 // WebDAV Server
+app.use(webdav.extensions.express('/webDAV', server));
+
 server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('C:/Users/burkh/Documents/15_Master/01_Kernfächer/Service Solution Design/DigitalerImpfpass/samlBackend/public/webDavFiles'), (success) => {
-     console.log('READY');
+
+let file1 = webdav.ResourceType.File;
+
+  //let content = "test123"
+  //fs.writeFile(file1, content, (err) => {
+    // throws an error, you could also catch it here
+   // if (err) throw err;
+
+    // success case, the file was saved
+   // console.log('Content saved!');
+//})
+//check!!!
+  server.rootFileSystem().addSubTree(server.createExternalContext(), {
+      'folder1': {                                // /folder1
+          'file1.txt': webdav.ResourceType.File,  // /folder1/file1.txt
+          'file2.txt': webdav.ResourceType.File   // /folder1/file2.txt
+      },
+      'file0.txt': webdav.ResourceType.File       // /file0.txt
+  })
+//write into the generated file
+server.start(() => console.log('READY'));
 });
 
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
 
-app.use(webdav.extensions.express('/webDAV', server));
+
 
 
