@@ -1,0 +1,85 @@
+<!--<h1 class="mt-4">Übersicht Impfungen</h1> 
+<p class="lead mb-3">Impfung hinzufügen für <%= user.name %></p> -->
+
+  <!--check if href entries are correct. Alternatively add # instead of the link. Find out references to models/routes -->
+<!--<div class="btn-group-vertical">
+<a href="/dashboard/vaccination" class="btn btn-secondary" >Impfungen</a>
+<a href="/dashboard/checklist" class="btn btn-secondary" >Checklisten</a> 
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+</div>
+-->
+
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Impfung hinzufügen
+      </h1>
+      <% include ./partials/messages %>
+      <form action="/dashboard/vaccinations" method="POST">
+        <div class="form-group">
+          <label for="impfstoff">Impfstoff</label>
+          <input
+            type="impfstoff"
+            id="impfstoff"
+            name="impfstoff"
+            class="form-control"
+            placeholder="Impfstoff hinzufügen"
+            value="<%= typeof impfstoff != 'undefined' ? impfstoff : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="dosis">Dosis</label>
+          <input
+            type="dosis"
+            id="dosis"
+            name="dosis"
+            class="form-control"
+            placeholder="Dosis eintragen"
+            value="<%= typeof dosis != 'undefined' ? dosis : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="arzt">Arzt</label>
+          <input
+            type="arzt"
+            id="arzt"
+            name="arzt"
+            class="form-control"
+            placeholder="Arzt eintragen"
+            value="<%= typeof arzt!= 'undefined' ? arzt : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="impfdatum">Impfdatum</label>
+          <input
+            type="impfdatum"
+            id="impfdatum"
+            name="impfdatum"
+            class="form-control"
+            placeholder="Impfdatum eintragen"
+            value="<%= typeof impfdatum!= 'undefined' ? impfdatum : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="auffrischung">Auffrischdatum</label>
+          <input
+            type="auffrischung"
+            id="auffrischung"
+            name="auffrischung"
+            class="form-control"
+            placeholder="Datum für Auffrischimpfung eintragen"
+            value="<%= typeof auffrischung!= 'undefined' ? auffrischung : '' %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Impfung hinzufügen
+        </button>
+        <button type="submit" class="btn btn-primary btn-block">
+          Impfungen einsehen
+        </button>
+      </form>
+     <!--<p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p> -->
+    </div>
+  </div>
+</div>

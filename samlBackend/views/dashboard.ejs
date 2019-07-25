@@ -1,0 +1,23 @@
+<h1 class="mt-4">Der digitale Impfpass</h1>
+<p class="lead mb-3">Willkommen <%= user.name %></p>
+
+<!--ToDo: reference mongoDB collection to dropdown menu or insert patients manually. Selected patient should be displayed - jquery script required --> 
+<div class="dropdown">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+      Patient wählen
+    </button>
+    <!--check if it works out better adding Patient1 and so on instead of dropdown-item. href # correct or better link to user??-->
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Susi Sorglos</a>
+      <a class="dropdown-item" href="#">Link 2</a>
+      <a class="dropdown-item" href="#">Link 3</a>
+    </div>
+  </div> 
+  <!--check if href entries are correct. Alternatively add # instead of the link. Find out references to models/routes -->
+<div class="btn-group-vertical">
+<a href="/dashboard/vaccinations" class="btn btn-secondary" >Impfungen</a>
+<a href="/dashboard/checklist" class="btn btn-secondary" >Checklisten</a> 
+<a href="/dashboard/export" class="btn btn-secondary" >Export</a>
+<a href="/dashboard/appointments" class="btn btn-secondary" >Abo Calendar</a> 
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+</div>

@@ -20,6 +20,9 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const ical = require('ical-generator');
 const cal = ical({domain: 'impfpass.pass', name: 'my first iCal'});
+var wfs = require("webdav-fs");
+ 
+
 
 const app = express();
 
@@ -277,15 +280,17 @@ server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('C:/Users/burkh/Do
 
 let file1 = webdav.ResourceType.File;
 
-  //let content = "test123"
-  //fs.writeFile(file1, content, (err) => {
-    // throws an error, you could also catch it here
-   // if (err) throw err;
+// //let content = "test123";
+// fs.writeFile('http://localhost:5000/webDav/test.txt', "hallo", function(err) {
+//     // throws an error, you could also catch it here
+//    if (err) {
+// 	console.error(err.message);
+// 	}
 
-    // success case, the file was saved
-   // console.log('Content saved!');
-//})
-//check!!!
+//     // success case, the file was saved
+//    // console.log('Content saved!');
+// })
+// //check!!!
   server.rootFileSystem().addSubTree(server.createExternalContext(), {
       'folder1': {                                // /folder1
           'file1.txt': webdav.ResourceType.File,  // /folder1/file1.txt
@@ -297,7 +302,15 @@ let file1 = webdav.ResourceType.File;
 server.start(() => console.log('READY'));
 });
 
+// wfs.stat("/report.docx", function(err, data) {
+//     console.log("Is file:", data.isFile());
+// });
 
+// wfs.writeFile("/Temp/im-here.txt", "This is a saved file! REALLY!!", function(err) {
+//     if (err) {
+//         console.error(err.message);
+//     }
+// });
  
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)

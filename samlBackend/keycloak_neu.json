@@ -1,0 +1,71 @@
+{
+    "clientId": "DigitalerImpfpass",
+    "name": "keycloak",
+    "rootUrl": "http://127.0.0.1:4006",
+    "adminUrl": "http://127.0.0.1:4006",
+    "baseUrl": "/login",
+    "surrogateAuthRequired": false,
+    "enabled": true,
+    "clientAuthenticatorType": "client-secret",
+    "redirectUris": [
+        "http://127.0.0.1:4006/login/callback",
+        "http://127.0.0.1:4200",
+        "http://127.0.0.1:4006",
+        "*"
+    ],
+    "webOrigins": [],
+    "notBefore": 0,
+    "bearerOnly": false,
+    "consentRequired": false,
+    "standardFlowEnabled": true,
+    "implicitFlowEnabled": false,
+    "directAccessGrantsEnabled": false,
+    "serviceAccountsEnabled": false,
+    "publicClient": false,
+    "frontchannelLogout": true,
+    "protocol": "saml",
+    "attributes": {
+        "saml.assertion.signature": "false",
+        "saml_idp_initiated_sso_relay_state": "authentification successful",
+        "saml.force.post.binding": "true",
+        "saml.multivalued.roles": "false",
+        "saml.encrypt": "false",
+        "login_theme": "keycloak",
+        "saml.server.signature": "true",
+        "saml_idp_initiated_sso_url_name": "http://localhost:8080/auth/",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml.signing.certificate": "MIICsTCCAZkCBgFsHxYeGDANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFEaWdpdGFsZXJJbXBmcGFzczAeFw0xOTA3MjMxMzQ1MzhaFw0yOTA3MjMxMzQ3MThaMBwxGjAYBgNVBAMMEURpZ2l0YWxlckltcGZwYXNzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA06qyEDixcgaoEMApVZ42Gap0lMp99TLkmciP2Mu75zrbuhmVEXqBKDptFaOd5RmgDZJHdWGnQf0fzyOUmTN90BrFiLUqG1z0xZJevsqiEMWWpY0O8XJdN2embYmzURBCOUB9NY1vXdXxsyGbYF3d/6K2qHaJqcwwq7rcupfG2qvAkeMfXOaqO0Q7ZLcVRj5zOpJsKa0mVU3pQ28Ejc2rTg5KKFt73sIJ07kYC+2l67zhSUAq66EzXdy1fcb4RA2heePo1mCs9d80zpqKNIXWcB0Wuad7YoPNTF2vgz1NypMLvcQhOFJwqpKflUR0gYpA8YTUCphS7qabIt4Zp2Aw0QIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQC2kiJudXMfcNAn78ogu6N31NW4ElGdbnJz5pnWy7D4mDLi1rk5CM/YbQj7wgKqk5QK4e/TjX4lUMEDKjpOcnBgTkArzqWZko1/o2vp13ScHTHwtCXkNGH287/38BKrsss0G6buPaYdilkdErL2yLuMvkhGAye+pWPOvEVoiYtwcW3JCvbdLUD39d5YdIRprLwhXnAqyrhQGfuwbCXH0jCopvmZSfk5uO8bKFEtb2g9mEhcHwUDWnuOgDSPsIz23/+CbNrbmOsa0AJMSVFKAInrWA/Yls6VFMuNexFZ90VNE92JPEC+q6ZJQo8feVXL9s2c3JJ2wqxJW3CgPzPw3/pr",
+        "saml.signature.algorithm": "RSA_SHA256",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "true",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "true",
+        "display.on.consent.screen": "false",
+        "saml.signing.private.key": "MIIEowIBAAKCAQEA06qyEDixcgaoEMApVZ42Gap0lMp99TLkmciP2Mu75zrbuhmVEXqBKDptFaOd5RmgDZJHdWGnQf0fzyOUmTN90BrFiLUqG1z0xZJevsqiEMWWpY0O8XJdN2embYmzURBCOUB9NY1vXdXxsyGbYF3d/6K2qHaJqcwwq7rcupfG2qvAkeMfXOaqO0Q7ZLcVRj5zOpJsKa0mVU3pQ28Ejc2rTg5KKFt73sIJ07kYC+2l67zhSUAq66EzXdy1fcb4RA2heePo1mCs9d80zpqKNIXWcB0Wuad7YoPNTF2vgz1NypMLvcQhOFJwqpKflUR0gYpA8YTUCphS7qabIt4Zp2Aw0QIDAQABAoIBAFCU7ZFLZBKbAiTOY24a+1GuGRAEPwu4QlthhZHtji2rtLcWwi+TSdR82cahMZ1kshA4nkfL05dFvHRpgUsJ1V4Csy0me09LhkwpOzS7hBOKhZ2lJAk7ls1fAnc1MzUrUWrmaESZAcrhhlDB/JslYTzPP2bHKgWgnO7kBuBqo+PfSf7J2wVklQhoq3WxqoejwWGhv/SN3YUiOni53STUGJDGCWm9r0Q1wMXkKDh1CWr9oWvEDt9F7ESje5B6x2/Yyq1lft28uI1m9DRLaprahhPiSSrC14mWdxaQWbBVOEj1cj7122yq4AZjVl5hP2PYka2wM5PW5vyEz481OOIjRfkCgYEA7JcKk54g/jpppsrD03GxVkj3UNC3EvBDGibAVFcytQLxaaJllw4jpJFXXUN2d3N9/9lrSfgHOaAjl/xqP9jZrShwGTfUaV6Vok9PNHa3eF9BPyLA5tp/kExMwn9DqPyfJ8WtOWSMULXXKkwO4FRpWyHmG2gkERNCN5rRo+qOlhsCgYEA5Qg05HxkAgRytE16LkKkyKuOU5JxSIiwmkK0VTyF7ynnULGOdRl1PaMGvPj24p+n4e9/kPJnMNBWl3ZWv+cLiwXUoGiFLml4DnO5a8x80+n8+Qxss+IQF660uOKT/yglOzMrIqfbFxk0ZsKN3NnAfqYrMf7gQEMmC4l6JNmmM4MCgYB51L2pjoBG6iWFslxtAdrkJ+bTQudDZV3olZPs2opOFBnk36+Yvbs0/3MRn6/diyeTHI7XJFX0IraxiVXdUvmk5XH0Sn+jUwWS82xCA/AumD6tGGRlfJa7486TSZ2543zBqlWtfE2VMk5+hXQTqOQn/ajU7CfGczhiEeNqmVqbiQKBgQDcDsOLWb1Zdt6jQOIJOr1LlhJ9V/KCp9tPjJHqZ+mkPxXjIYboGlrcqxxZS7kjTBWpb02Zfl8JttPMWcbGQf+ER0jiCysTygCxmh1pZyP1FRicToTPXYDq0FESZ5mdivwi4moqtS88BVqk9YAK2CotRgmw0tyywhH2+dOjPoCDcwKBgFgXCAml0yPNHvQS2PJ0GXN/rPwmzap02RipfMlrJUXkTlhUezee5hkVxhTZP8VrvpZDN8n2+aZS0feiOzCebMt+ffntOmYrg1i96umWoCFeqA712DSAOdsPuIKmPW6pl7UKDA6eqXkHClE0PdR22HSoL4J3miyjhqZF52n8sDap",
+        "saml_name_id_format": "username",
+        "saml.onetimeuse.condition": "false",
+        "saml_signature_canonicalization_method": "http://www.w3.org/2001/10/xml-exc-c14n#"
+    },
+    "authenticationFlowBindingOverrides": {},
+    "fullScopeAllowed": true,
+    "nodeReRegistrationTimeout": -1,
+    "defaultClientScopes": [
+        "web-origins",
+        "role_list",
+        "profile",
+        "roles",
+        "email"
+    ],
+    "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+    ],
+    "access": {
+        "view": true,
+        "configure": true,
+        "manage": true
+    }
+}
