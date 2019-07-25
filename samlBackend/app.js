@@ -22,7 +22,7 @@ const ical = require('ical-generator');
 const cal = ical({domain: 'impfpass.pass', name: 'my first iCal'});
 var wfs = require("webdav-fs");
  
-
+const sessionStore = [''];
 
 const app = express();
 
@@ -197,7 +197,9 @@ app.get('/',
 app.get('/login',
 	passport.authenticate('saml', {failureRedirect: '/', failureFlash: true}),
 	function (req, res) {
+		sessionStore.push(req.sessionID);
 		console.log('successfully authentificated');
+		console.log(sessionStore);
 		res.redirect('http://localhost:4200');
 	}
 );
@@ -209,7 +211,7 @@ app.post('/login/callback',
 	}
 );
 
-app.get('/apitoken',
+/*app.get('/apitoken',
 ensureAuthenticated, (req, res, next) => {console.log('###############'); next();},
 Keycloak.protect(),
 	function (req, res) { 
@@ -222,16 +224,27 @@ Keycloak.protect(),
 			res.status(401).send;
 		}
 	}
-	// function (req, res) {
-	// 	// TODO: Fix req.isAuthenticated. It doesnt recognize a revisiting user - as a result the api key is never submitted
-	// 	if (req.isAuthenticated()) {
-	// 		res.status(200)
-	// 			.type('application/json')
-	// 			.send('{"token": "abasbdasdaksjdlaks"}');
-	// 	} else {
-	// 		res.status(401).send();
-	// 	}
-	// }
+
+*/
+app.get('/apitoken', function (req, res) {
+	 	// TODO: Fix req.isAuthenticated. It doesnt recognize a revisiting user - as a result the api key is never submitted
+	 	if (sessionStore.find((element) => {
+	 		console.log('comparing ', element, req.sessionID);
+	 		return element === req.sessionID;
+		})) {
+			console.log(found);
+			console.log(req.sessionID);
+			res.status(200)
+	 			.type('application/json')
+	 			.send('{"token": "abasbdasdaksjdlaks"}');
+	 	} else {
+	 		console.log(memoryStore);
+	 		if (req.sessionStore) {
+	 			console.log(req.sessionID, req.sessionStore[0]);
+			}
+	 		res.status(401).send();
+	 	}
+	 }
 );
 
 app.get('/logout', function (req, res) {
