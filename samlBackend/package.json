@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.10.2",
+    "ical-generator": "^1.7.2",
     "install": "^0.13.0",
     "json2csv": "^4.5.2",
     "keycloak-connect": "^6.0.1",

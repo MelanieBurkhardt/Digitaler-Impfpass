@@ -18,6 +18,8 @@ var MemoryStore = require('memorystore')(session);
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
+const ical = require('ical-generator');
+const cal = ical({domain: 'impfpass.pass', name: 'my first iCal'});
 
 const app = express();
 
@@ -93,22 +95,17 @@ app.use('/dashboard/vaccinations', require('./routes/vaccinations.js'));
 console.log('xyz');
 //get methode for icall - app.use or app.get?? 
 //app.use('/calendar', require('./routes/calendar.js'));
-//app.get
-/*
-app.use('/', (req, res) => {console.log('hallo');
-  // for demo purpose just create iCal on the fly
-  let iCal = ics.createNew('iCal Demo by Shaun Calendar', null, null, null, '-//Shaun Xu//NONSGML iCal Demo Calendar//EN');
-  let iCalString = iCal.toICSString();
 
-  res.set('Content-Type', 'text/calendar;charset=utf-8');
-  res.set('Content-Disposition', 'attachment; filename="worktile.pro.calendar.my.ics"');
-  res.send(iCalString);
-}); */
+
 //maybe app.use for appointments required
-const PORT = process.env.PORT || 5000;
+(() => {
+	app.get('/dashboard/appointments/subscribe', (req, res) => {
+		res.send('Hello iCal')
+	});
+	const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
-
+	app.listen(PORT, console.log(`Server started on port ${PORT}`));
+})();
 
 var samlStrategy = new saml.Strategy({
 	// URL that goes from the Identity Provider -> Service Provider
@@ -246,6 +243,20 @@ app.get('/login/fail',
 	}
 );
 
+// ical: localhost:4006/ical
+app.get('/ical', 
+function (req, res) {
+	cal.createEvent({
+		start: '20190725T153000',
+		end: '20190725T154700' ,
+		summary: 'Example Event',
+		description: 'SSD Beispiel',
+		location: 'M',
+		url: 'http://sebbo.net/'
+	});
+	cal.serve(res); 
+})
+
 app.get('/Shibboleth.sso/Metadata',
 	function (req, res) {
 		res.type('application/xml');
@@ -286,6 +297,8 @@ let file1 = webdav.ResourceType.File;
 server.start(() => console.log('READY'));
 });
 
+
+ 
 var server = app.listen(4006, function () {
 	console.log('Listening on port %d', server.address().port)
 });
