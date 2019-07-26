@@ -12,7 +12,7 @@ var cors = require('cors');
 const webdav = require('webdav-server').v2;
 // Use var instead of const, because sever is declared twice
 var server = new webdav.WebDAVServer();
-// TODO: proper MongoDB connection  
+// MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var MemoryStore = require('memorystore')(session);
@@ -64,8 +64,8 @@ mongoose
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
-// // Express body parser
-// app.use(express.urlencoded({ extended: true }));
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
 // Express session
 app.use(
@@ -76,9 +76,9 @@ app.use(
   })
 );
 
-// // // Passport middleware
-// // app.use(passport.initialize());
-// // app.use(passport.session());
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect flash
 app.use(flash());
@@ -97,9 +97,6 @@ app.use('/users', require('./routes/users.js'));
 //path changed. old: '/dashboard/vaccinations ???CHECK???
 app.use('/dashboard/vaccinations', require('./routes/vaccinations.js'));
 console.log('xyz');
-//get methode for icall - app.use or app.get?? 
-//app.use('/calendar', require('./routes/calendar.js'));
-
 
 //maybe app.use for appointments required
 (() => {
@@ -111,6 +108,7 @@ console.log('xyz');
 	app.listen(PORT, console.log(`Server started on port ${PORT}`));
 })();
 
+// authentification
 var samlStrategy = new saml.Strategy({
 	// URL that goes from the Identity Provider -> Service Provider
 	callbackUrl: process.env.CALLBACK_URL,
@@ -150,7 +148,7 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(cookieParser());
-// app.use(bodyParser());
+app.use(bodyParser());
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	name: "impfpass_session",
@@ -247,15 +245,15 @@ app.get('/login/fail',
 	}
 );
 
-// ical: localhost:4006/ical
-app.get('/ical', 
+// ical: localhost:4006/dashboard/appointments, click on "Abo Calendar"
+app.get('/dashboard/appointments', 
 function (req, res) {
 	cal.createEvent({
-		start: '20190725T153000',
-		end: '20190725T154700' ,
+		start: '20190726T153000',
+		end: '20190726T160000' ,
 		summary: 'Example Event',
-		description: 'SSD Beispiel',
-		location: 'M',
+		description: 'Feierabend',
+		location: 'daheim',
 		url: 'http://sebbo.net/'
 	});
 	cal.serve(res); 
