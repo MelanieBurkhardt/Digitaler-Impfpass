@@ -98,7 +98,7 @@ app.use('/users', require('./routes/users.js'));
 app.use('/dashboard/vaccinations', require('./routes/vaccinations.js'));
 console.log('xyz');
 
-//maybe app.use for appointments required
+// // server on port 5000
 (() => {
 	app.get('/dashboard/appointments/subscribe', (req, res) => {
 		res.send('Hello iCal')
@@ -221,16 +221,6 @@ Keycloak.protect(),
 			res.status(401).send;
 		}
 	}
-	// function (req, res) {
-	// 	// TODO: Fix req.isAuthenticated. It doesnt recognize a revisiting user - as a result the api key is never submitted
-	// 	if (req.isAuthenticated()) {
-	// 		res.status(200)
-	// 			.type('application/json')
-	// 			.send('{"token": "abasbdasdaksjdlaks"}');
-	// 	} else {
-	// 		res.status(401).send();
-	// 	}
-	// }
 );
 
 app.get('/logout', function (req, res) {
@@ -279,17 +269,17 @@ server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('C:/Users/burkh/Do
 
 let file1 = webdav.ResourceType.File;
 
-// //let content = "test123";
-// fs.writeFile('http://localhost:5000/webDav/test.txt', "hallo", function(err) {
-//     // throws an error, you could also catch it here
-//    if (err) {
-// 	console.error(err.message);
-// 	}
+//let content = "test123";
+fs.writeFile('./test2.txt', "hallo2", function(err) {
+    // throws an error, you could also catch it here
+   if (err) {
+	console.error(err.message);
+	}
 
-//     // success case, the file was saved
-//    // console.log('Content saved!');
-// })
-// //check!!!
+    // success case, the file was saved
+   // console.log('Content saved!');
+})
+//check!!!
   server.rootFileSystem().addSubTree(server.createExternalContext(), {
       'folder1': {                                // /folder1
           'file1.txt': webdav.ResourceType.File,  // /folder1/file1.txt
@@ -297,7 +287,7 @@ let file1 = webdav.ResourceType.File;
       },
       'file0.txt': webdav.ResourceType.File       // /file0.txt
   })
-//write into the generated file
+// write into the generated file
 server.start(() => console.log('READY'));
 });
 
@@ -317,7 +307,7 @@ https.createServer({
 	cert: fs.readFileSync('./cert/server.cert')
 }, app)
 	.listen(8443, function () {
-		console.log('Listening on https port 8443', server.address().port)
+		console.log('Listening on https port %d', server.address().port)
 	});
 
 var server = app.listen(4006, function () {
