@@ -265,12 +265,12 @@ app.use(function (err, req, res, next) {
 // WebDAV Server
 app.use(webdav.extensions.express('/webDAV', server));
 
-server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('C:/Users/burkh/Documents/15_Master/01_Kernfächer/Service Solution Design/DigitalerImpfpass/samlBackend/public/webDavFiles'), (success) => {
+server.setFileSystem('/webDav', new webdav.PhysicalFileSystem('/localhost:4006/webDAV'), (success) => {
 
 let file1 = webdav.ResourceType.File;
 
 //let content = "test123";
-fs.writeFile('./test2.txt', "hallo2", function(err) {
+fs.writeFile('./test2.txt', "hallo2", (err) => {
     // throws an error, you could also catch it here
    if (err) {
 	console.error(err.message);
